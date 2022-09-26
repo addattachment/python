@@ -1,0 +1,13 @@
+name: addAttachment
+
+dependencies:
+  - python=3.9
+  - numpy
+  - pyyaml=6.0
+  - liblsl=1.16.0
+  - websockets=10.3
+  - pip
+  - pip:
+      - pywin32==304
+      - brainflow==5.2.1
+      - pylsl==1.16.0

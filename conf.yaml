@@ -1,0 +1,7 @@
+DATA_CAPTURE:
+  DIRECTORIES:
+    - 'eeg'
+#    - 'eog'
+    - 'gsr'
+    - 'websocket'
+  ROOT_DATA_PATH: 'C:\Users\u0105505\Documents\AddAttachment'

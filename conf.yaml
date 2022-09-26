@@ -4,4 +4,4 @@ DATA_CAPTURE:
 #    - 'eog'
     - 'gsr'
     - 'websocket'
-  ROOT_DATA_PATH: 'C:\Users\u0105505\Documents\AddAttachment'
+  ROOT_DATA_PATH: 'C:\Users\u0105505\OneDrive - KU Leuven\Documents\GIT\addattachment-python\data'

@@ -10,11 +10,17 @@ Class to create the GUI to enter additional information
 class GUI(tk.Tk):
     def __init__(self):
         super().__init__()
+        self.age_error = None
+        self.textbox_label = None
+        self.textbox_age = None
+        self.player_gender = None
+        self.player_age = None
         self.player_name = None
+        self.contingency = None
         self.title("AddAttachment")
 
-        window_width = 1200
-        window_height = 800
+        window_width = 400
+        window_height = 400
         # get the screen dimension
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
@@ -32,14 +38,39 @@ class GUI(tk.Tk):
         name_frame.pack(padx=10, pady=10, fill='x', expand=True)
 
         self.player_name = tk.StringVar()
+        ttk.Label(name_frame, justify=tk.LEFT, text="Naam speler").grid(row=0)
         textbox = ttk.Entry(name_frame, textvariable=self.player_name)
-        textbox.pack(fill="x", expand=True)
+        textbox.grid(row=0, column=1)
 
+        self.contingency = tk.IntVar()
+        tk.Label(name_frame, justify=tk.LEFT, text="Contingentie speler").grid(row=1)
+        radio_cont = ttk.Radiobutton(name_frame, text="20", variable=self.contingency, value=20)
+        radio_cont.grid(row=1, column=1)
+        radio_cont2 = ttk.Radiobutton(name_frame, text="80", variable=self.contingency, value=80)
+        radio_cont2.grid(row=1, column=2)
         # entered_button = ttk.Button(name_frame, text="Enter", command=self.login_clicked)
         # entered_button.pack(fill="x", expand=True, pady=10)
 
+        vcmd = (self.register(self.validate_age), '%P')
+        ivcmd = (self.register(self.on_invalid),)
+        self.player_age = tk.IntVar()
+        self.textbox_label = ttk.Label(name_frame, foreground='red', justify=tk.LEFT, text="Leeftijd speler")
+        self.textbox_label.grid(row=2)
+        self.textbox_age = ttk.Entry(name_frame, textvariable=self.player_age)
+        self.textbox_age.config(validate='focusout', validatecommand=vcmd, invalidcommand=ivcmd)
+        self.textbox_age.grid(row=2, column=1)
+        self.age_error = ttk.Label(name_frame, foreground='red')
+        self.age_error.grid(row=2, column=2)
+
+        self.player_gender = tk.StringVar()
+        tk.Label(name_frame, justify=tk.LEFT, text="Geslacht speler").grid(row=3)
+        radio_gend = ttk.Radiobutton(name_frame, text="M", variable=self.player_gender, value="M")
+        radio_gend.grid(row=3, column=1)
+        radio_gend2 = ttk.Radiobutton(name_frame, text="V", variable=self.player_gender, value="V")
+        radio_gend2.grid(row=3, column=2)
+
         close_button = ttk.Button(name_frame, text="Save & close", command=self.destroy)
-        close_button.pack(pady=20)
+        close_button.grid(row=6, column=0)
 
     # def login_clicked(self):
     #     """ callback when the login button clicked
@@ -51,4 +82,29 @@ class GUI(tk.Tk):
     #     )
 
     def get_results(self):
-        return self.player_name.get()
+        results = {
+            "name": self.player_name.get(),
+            "contingency": self.contingency.get(),
+            "age": self.player_age.get(),
+            "gender": self.player_gender.get()
+        }
+        return results
+
+    def show_message(self, error='', color='black'):
+        self.age_error['text'] = error
+        self.textbox_label['foreground'] = color
+        self.textbox_age['foreground'] = color
+
+    def validate_age(self, value):
+        if int(value) < 9 or int(value) > 12:
+            return False
+        self.show_message()
+        return True
+
+    def on_invalid(self):
+        """
+        Show the error message if the data is not valid
+        :return:
+        """
+        print("not good")
+        self.show_message('Please enter a valid age', 'red')

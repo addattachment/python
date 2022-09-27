@@ -80,9 +80,7 @@ if __name__ == '__main__':
     # create the folder structure to capture the different datastreams
     root_data_path = create_folder_structure(player.name, player.playtime, config)
     # create a config file keeping track of all settings for that child
-
     player.create_player_conf(location=root_data_path, file_name="player_config.json")
-
     # open websocket and stream data to folder websocket (separate files for EOG data?)
 
     # open EEG stream and stream towards EEG folder

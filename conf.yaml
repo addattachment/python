@@ -5,3 +5,8 @@ DATA_CAPTURE:
     - 'gsr'
     - 'websocket'
   ROOT_DATA_PATH: 'C:\Users\u0105505\OneDrive - KU Leuven\Documents\GIT\addattachment-python\data'
+  SD_CARD_TIME: "5m"
+  EEG: "eeg.csv"
+  STREAM:
+    IP: "224.0.0.1"
+    PORT: "5050"

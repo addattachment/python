@@ -1,7 +1,7 @@
 name: addAttachment
 
 dependencies:
-  - python=3.9
+  - python=3.10
   - numpy
   - pyyaml=6.0
   - liblsl=1.16.0
@@ -12,3 +12,4 @@ dependencies:
       - brainflow==5.2.1
       - pylsl==1.16.0
       - pyinstaller
+      - python-osc

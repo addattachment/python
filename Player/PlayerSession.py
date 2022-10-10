@@ -8,6 +8,7 @@ class PlayerSession:
         self.name = player_config.get("name")
         self.age = player_config.get("age")
         self.contingency = player_config.get("contingency")
+        self.treatment = player_config.get("treatment")
         self.playtime = playtime
         self.gsr_dir = None
         self.websocket_dir = None
@@ -27,7 +28,8 @@ class PlayerSession:
             "contingency": self.contingency,
             "date": self.playtime,
             "age": self.age,
-            "gender": self.gender
+            "gender": self.gender,
+            "treatment": self.treatment
         }
         with open(Path(location / file_name), "w+") as c:
             res = json.dumps(conf)

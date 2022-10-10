@@ -10,6 +10,7 @@ Class to create the GUI to enter additional information
 class GUI(tk.Tk):
     def __init__(self):
         super().__init__()
+        self.player_treatment = None
         self.age_error = None
         self.textbox_label = None
         self.textbox_age = None
@@ -38,7 +39,7 @@ class GUI(tk.Tk):
         name_frame.pack(padx=10, pady=10, fill='x', expand=True)
 
         self.player_name = tk.StringVar()
-        ttk.Label(name_frame, justify=tk.LEFT, text="Naam speler").grid(row=0)
+        ttk.Label(name_frame, justify=tk.LEFT, text="Identificatie speler").grid(row=0)
         textbox = ttk.Entry(name_frame, textvariable=self.player_name)
         textbox.grid(row=0, column=1)
 
@@ -69,6 +70,13 @@ class GUI(tk.Tk):
         radio_gend2 = ttk.Radiobutton(name_frame, text="V", variable=self.player_gender, value="V")
         radio_gend2.grid(row=3, column=2)
 
+        self.player_treatment = tk.StringVar()
+        tk.Label(name_frame, justify=tk.LEFT, text="Treatment speler").grid(row=4)
+        radio_treat = ttk.Radiobutton(name_frame, text="A", variable=self.player_treatment, value="A")
+        radio_treat.grid(row=4, column=1)
+        radio_treat2 = ttk.Radiobutton(name_frame, text="B", variable=self.player_treatment, value="B")
+        radio_treat2.grid(row=4, column=2)
+
         close_button = ttk.Button(name_frame, text="Save & close", command=self.destroy)
         close_button.grid(row=6, column=0)
 
@@ -86,7 +94,8 @@ class GUI(tk.Tk):
             "name": self.player_name.get(),
             "contingency": self.contingency.get(),
             "age": self.player_age.get(),
-            "gender": self.player_gender.get()
+            "gender": self.player_gender.get(),
+            "treatment": self.player_treatment.get()
         }
         return results
 

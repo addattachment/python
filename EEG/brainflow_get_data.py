@@ -110,7 +110,7 @@ class EEG:
         data = self.board.get_board_data()
         DataFilter.write_file(data, str(self.file.resolve()), 'a')  # use 'a' for append mode
 
-    def insert_marker_test(self, i: float):
+    def insert_marker(self, i: float):
         self.board.insert_marker(i)
         print("inserted {}".format(i))
 
@@ -159,15 +159,19 @@ class EEG:
         self.board.start_stream()
         # self.common_capture()
 
+    def test_markers(self):
         i = 1.0
         try:
             while True:
-                self.insert_marker_test(i)
+                self.insert_marker(i)
                 i += 0.1
                 time.sleep(1)
         except KeyboardInterrupt:
             pass
-        print("finishing up")
+        self.stop_eeg()
+
+    def stop_eeg(self):
+        print("finishing up EEG")
         self.stop_sd_recording()
         self.board.stop_stream()
         self.board.release_session()

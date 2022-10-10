@@ -10,14 +10,22 @@ In this file, we'll:
 
 We'll try to make an executable of this project using PyInstaller
 """
+import asyncio
 from datetime import datetime
 
 from brainflow import BoardIds
 
 from EEG.brainflow_get_data import EEG
+from LSL.LSL_ReceiveData import LSLReceptor
 from Player.PlayerSession import PlayerSession
 from utils.GUI import GUI
 from utils.utils import *
+from websocket.WebSocketServer import startWsServer
+
+
+def stop_all(websocket, eeg, gsr):
+    eeg.stop_eeg()
+
 
 if __name__ == '__main__':
     gui = GUI()
@@ -31,14 +39,26 @@ if __name__ == '__main__':
     root_data_path = create_folder_structure(player.name, player.playtime, config)
     # create a config file keeping track of all settings for that child
     player.create_player_conf(location=root_data_path, file_name="player_config.json")
-    # open websocket and stream data to folder websocket (separate files for EOG data?)
-
+    # check if an LSL stream is running
+    # lsl = LSLReceptor(value="Markers")
+    # lsl.is_running()
     # open EEG stream and stream towards EEG folder
-    eeg = EEG(
-        config=config,
-        root_data_path=root_data_path,
-        board_id=BoardIds.CYTON_BOARD
-    )
-    eeg.launch_eeg()
+    # eeg = EEG(
+    #     config=config,
+    #     root_data_path=root_data_path,
+    #     board_id=BoardIds.CYTON_BOARD
+    # )
+    # eeg.launch_eeg()
 
-    # open GSR and stream towards GSR folder
+    # open websocket and stream data to folder websocket (separate files for EOG data?)
+    websocket_data = [
+        {"name": player.name},
+        {"contingency": player.contingency}
+    ]
+    try:
+        asyncio.run(startWsServer(params=websocket_data, ip="localhost", port=8081))
+    except asyncio.CancelledError:
+        pass
+    except KeyboardInterrupt:
+        print("stopped by keyboard")
+        pass

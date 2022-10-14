@@ -34,21 +34,21 @@ if __name__ == '__main__':
     config = load_config(Path(Path.cwd() / "conf.yaml"))
     # make a player object to keep track of variables
     player = PlayerSession(gui.get_results(), datetime.now().strftime("%Y_%m_%d__%H_%M"))
-    print(player.contingency)
     # create the folder structure to capture the different datastreams
     root_data_path = create_folder_structure(player.name, player.playtime, config)
     # create a config file keeping track of all settings for that child
     player.create_player_conf(location=root_data_path, file_name="player_config.json")
     # check if an LSL stream is running
-    # lsl = LSLReceptor(value="Markers")
-    # lsl.is_running()
+    lsl = LSLReceptor(value="Markers")
+    while not lsl.is_running():
+        continue
     # open EEG stream and stream towards EEG folder
-    # eeg = EEG(
-    #     config=config,
-    #     root_data_path=root_data_path,
-    #     board_id=BoardIds.CYTON_BOARD
-    # )
-    # eeg.launch_eeg()
+    eeg = EEG(
+        config=config,
+        root_data_path=root_data_path,
+        board_id=BoardIds.CYTON_BOARD
+    )
+    eeg.launch_eeg()
 
     # open websocket and stream data to folder websocket (separate files for EOG data?)
     websocket_data = [
@@ -61,4 +61,5 @@ if __name__ == '__main__':
         pass
     except KeyboardInterrupt:
         print("stopped by keyboard")
+        stop_all(eeg=eeg)
         pass

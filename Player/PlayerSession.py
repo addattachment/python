@@ -6,6 +6,7 @@ class PlayerSession:
     def __init__(self, player_config: dict, playtime: str):
         self.gender = player_config.get("gender")
         self.name = player_config.get("name")
+        self.id = player_config.get("id")
         self.age = player_config.get("age")
         self.contingency = player_config.get("contingency")
         self.treatment = player_config.get("treatment")
@@ -23,8 +24,9 @@ class PlayerSession:
 
     def create_player_conf(self, location, file_name):
         # create a conf file for the player
+        # **important** we don't record the players name! This is solemnly used to show the name in VR
         conf = {
-            "name": self.name,
+            "id": self.id,
             "contingency": self.contingency,
             "date": self.playtime,
             "age": self.age,

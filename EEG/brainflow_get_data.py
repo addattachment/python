@@ -20,6 +20,7 @@ from utils.utils import load_config
 
 class EEG:
     def __init__(self, config: yaml, root_data_path: Path, board_id: BoardIds = BoardIds.CYTON_BOARD):
+        print("EEG init")
         self.board = None
         self.board_id = board_id
         self.config = config
@@ -158,6 +159,7 @@ class EEG:
         self.config_board()
         self.board.start_stream()
         # self.common_capture()
+        print("EEG started")
 
     def test_markers(self):
         i = 1.0

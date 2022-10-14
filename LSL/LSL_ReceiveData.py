@@ -15,7 +15,12 @@ class LSLReceptor:
         self.inlet = StreamInlet(self.streams[0])
 
     def is_running(self):
-        print(self.inlet.info())
+        # print(self.inlet.info())
+        if self.inlet.channel_count >= 1:
+            return True
+        else:
+            return False
+        # todo return boolean value to check if running!
 
     def receive_test(self):
         while True:
@@ -37,6 +42,7 @@ class LSLReceptor:
         print('todo')
         float_sample = 1.0  # todo make the magic of conversion happen
         return float_sample
+
 
 def main():
     lsl = LSLReceptor(value="Markers")

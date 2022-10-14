@@ -23,12 +23,17 @@ async def ws_handler(websocket, params):
 
 
 async def startWsServer(params: list[dict] = [{"i": "test"}], ip: str = 'localhost', port: int = 8081):
-    async with websockets.serve(functools.partial(ws_handler, params=params), ip, port):
+    print("starting websocket server")
+    async with websockets.serve(functools.partial(ws_handler, params=params), ip, port) as ws:
         await asyncio.Future()  # run forever
 
 
 if __name__ == '__main__':
-    asyncio.run(startWsServer())
+    websocket_data = [
+        {"id": "123"},
+        {"contingency": "20"}
+    ]
+    asyncio.run(startWsServer(params=websocket_data))
     # loop = asyncio.get_event_loop()
     # task = loop.create_task(startWsServer())
     # try:

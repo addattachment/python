@@ -35,7 +35,7 @@ if __name__ == '__main__':
     # make a player object to keep track of variables
     player = PlayerSession(gui.get_results(), datetime.now().strftime("%Y_%m_%d__%H_%M"))
     # create the folder structure to capture the different datastreams
-    root_data_path = create_folder_structure(player.name, player.playtime, config)
+    root_data_path = create_folder_structure(player.playtime, config)
     # create a config file keeping track of all settings for that child
     player.create_player_conf(location=root_data_path, file_name="player_config.json")
     # check if an LSL stream is running

@@ -15,8 +15,8 @@ def load_config(config_path):
         print(e)
 
 
-def create_folder_structure(player_name: str, date: str, config: yaml) -> Path:
-    root_data_path = Path(Path(config['DATA_CAPTURE']['ROOT_DATA_PATH']) / date / player_name)
+def create_folder_structure(date: str, config: yaml) -> Path:
+    root_data_path = Path(Path(config['DATA_CAPTURE']['ROOT_DATA_PATH']) / date)
     print("creating the folder structure in {}".format(root_data_path))
     dir_list = config['DATA_CAPTURE']['DIRECTORIES']
     for i in dir_list:

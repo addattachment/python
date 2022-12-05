@@ -29,4 +29,4 @@ def main(streamName: str = 'MyMarkerStream', contentType: str = "Markers", sourc
 
 
 if __name__ == '__main__':
-    main(streamName="DataSyncMarker", contentType="Markers", sourceId="12345")
+    main(streamName="DataSyncMarker", contentType="Markers", sourceId="123456")

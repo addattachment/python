@@ -13,6 +13,7 @@ class LSLReceptor:
         self.streams = resolve_stream(prop, value)
         # create a new inlet to read from the stream
         self.inlet = StreamInlet(self.streams[0])
+        self.Marker = {'ball_release': 0, 'ball_good_hit': 1, 'ball_bad_hit': 2, 'score': 3, 'test': 4}
 
     def is_running(self):
         # print(self.inlet.info())
@@ -28,9 +29,10 @@ class LSLReceptor:
             # interested in it)
             sample, timestamp = self.inlet.pull_sample()
             print("got %s at time %s" % (sample[0], timestamp))
+            print("converted: {}".format(list(self.Marker.keys())[list(self.Marker.values()).index(sample[0])]))
 
     def receive_when_sample_available(self):
-        # we set timeout to 0.0 so it doesn't block
+        # we set timeout to 0.0, so it doesn't block
         sample, timestamp = self.inlet.pull_sample(timeout=0.0)
         # print("got %s at time %s" % (sample[0], timestamp))
         if sample is not None:

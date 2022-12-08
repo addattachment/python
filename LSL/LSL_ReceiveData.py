@@ -28,8 +28,13 @@ class LSLReceptor:
             # get a new sample (you can also omit the timestamp part if you're not
             # interested in it)
             sample, timestamp = self.inlet.pull_sample()
-            print("got %s at time %s" % (sample[0], timestamp))
-            print("converted: {}".format(list(self.Marker.keys())[list(self.Marker.values()).index(sample[0])]))
+            print("got %s at time %s from name %s and source id %s" % (
+                sample[0], timestamp, self.streams[0].name(), self.streams[0].source_id()))
+            try:
+                print("converted: {}".format(list(self.Marker.keys())[list(self.Marker.values()).index(sample[0])]))
+            except Exception as e:
+                print(e)
+                pass
 
     def receive_when_sample_available(self):
         # we set timeout to 0.0, so it doesn't block
@@ -47,9 +52,17 @@ class LSLReceptor:
 
 
 def main():
-    lsl = LSLReceptor(value="Markers")
+    # lsl = LSLReceptor(value="Markers")
+    # lsl = LSLReceptor(prop="source_id", value="LSL2")
+    lsl = LSLReceptor(prop="name", value="DataSyncMarker_eeg")
+    print(lsl.inlet.value_type)
     lsl.receive_test()
 
 
 if __name__ == '__main__':
     main()
+
+"""IMPORTANT
+Make sure emotibit oscilloscope is looking for a stream 'DataSyncMarker_emotibit, source_id = LSL1'
+next, the python file should be the first one to connect, ONLY then you may open emotibit oscilloscope!
+"""

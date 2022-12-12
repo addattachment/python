@@ -1,11 +1,15 @@
 """Example program to demonstrate how to read string-valued markers from LSL."""
+import logging
+import threading
 
 from pylsl import StreamInlet, resolve_stream
 
+from EEG.brainflow_get_data import EEG
+
 
 class LSLReceptor:
-    def __init__(self, prop: str = 'type', value: str = 'Markers'):
-        """
+    def __init__(self, eeg: EEG = None, prop: str = 'type', value: str = 'Markers'):
+        """.
         function to capture LSL markers, we can convert these to float markers as described in data document
         :param prop: usually you don't touch this
         :param value: can be adjusted, we'll only be looking for data of this 'type'
@@ -14,6 +18,7 @@ class LSLReceptor:
         # create a new inlet to read from the stream
         self.inlet = StreamInlet(self.streams[0])
         self.Marker = {'ball_release': 0, 'ball_good_hit': 1, 'ball_bad_hit': 2, 'score': 3, 'test': 4}
+        self.eeg = eeg
 
     def is_running(self):
         # print(self.inlet.info())
@@ -23,6 +28,13 @@ class LSLReceptor:
             return False
         # todo return boolean value to check if running!
 
+    def start_receive_thread(self):
+        x = threading.Thread(target=self.receive_test)
+        logging.info("Main    : before running thread")
+        x.start()
+        logging.info("Main    : wait for the thread to finish")
+        return x
+
     def receive_test(self):
         while True:
             # get a new sample (you can also omit the timestamp part if you're not
@@ -30,6 +42,8 @@ class LSLReceptor:
             sample, timestamp = self.inlet.pull_sample()
             print("got %s at time %s from name %s and source id %s" % (
                 sample[0], timestamp, self.streams[0].name(), self.streams[0].source_id()))
+            if self.eeg is not None:
+                self.eeg.insert_marker(round(sample[0], 1))
             try:
                 print("converted: {}".format(list(self.Marker.keys())[list(self.Marker.values()).index(sample[0])]))
             except Exception as e:
@@ -56,13 +70,8 @@ def main():
     # lsl = LSLReceptor(prop="source_id", value="LSL2")
     lsl = LSLReceptor(prop="name", value="DataSyncMarker_eeg")
     print(lsl.inlet.value_type)
-    lsl.receive_test()
+    lsl.start_receive_thread()
 
 
 if __name__ == '__main__':
     main()
-
-"""IMPORTANT
-Make sure emotibit oscilloscope is looking for a stream 'DataSyncMarker_emotibit, source_id = LSL1'
-next, the python file should be the first one to connect, ONLY then you may open emotibit oscilloscope!
-"""

@@ -9,9 +9,10 @@ dependencies:
   - liblsl=1.16.0
   - websockets=10.3
   - pip
+  - pyserial=3.5
   - pip:
       - pywin32==304
-      - brainflow==5.2.1
+      - brainflow==5.5
       - pylsl==1.16.0
       - pyinstaller
       - python-osc

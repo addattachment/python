@@ -3,8 +3,8 @@ DATA_CAPTURE:
     - 'eeg'
     - 'gsr'
     - 'websocket'
-  ROOT_DATA_PATH: 'C:\Users\u0105505\OneDrive - KU Leuven\Documents\GIT\addattachment-python\data'
-  SD_CARD_TIME: "5m"
+  ROOT_DATA_PATH: 'C:\Users\student\Documents\git\addattachment-python\data'
+  SD_CARD_TIME: "30m"
   EEG: "eeg.csv"
   STREAM:
     IP: "224.0.0.1"

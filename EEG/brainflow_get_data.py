@@ -1,5 +1,8 @@
 import argparse
+import atexit
 import csv
+import logging
+import threading
 import time
 from datetime import datetime
 from pathlib import Path
@@ -112,8 +115,9 @@ class EEG:
         DataFilter.write_file(data, str(self.file.resolve()), 'a')  # use 'a' for append mode
 
     def insert_marker(self, i: float):
+        print("inserting {}".format(i))
+
         self.board.insert_marker(i)
-        print("inserted {}".format(i))
 
     def config_board(self):
         """
@@ -161,10 +165,19 @@ class EEG:
         # self.common_capture()
         print("EEG started")
 
+    def start_test_markers_thread(self):
+        x = threading.Thread(target=self.test_markers())
+        logging.info("Main    : before running thread")
+        x.start()
+        logging.info("Main    : wait for the thread to finish")
+        x.join()
+        logging.info("Main    : all done")
+
     def test_markers(self):
         i = 1.0
         try:
             while True:
+                print("sending {}".format(i))
                 self.insert_marker(i)
                 i += 0.1
                 time.sleep(1)
@@ -172,7 +185,9 @@ class EEG:
             pass
         self.stop_eeg()
 
+    @atexit.register
     def stop_eeg(self):
+        # make sure we clean the connection if the application is stopped
         print("finishing up EEG")
         self.stop_sd_recording()
         self.board.stop_stream()

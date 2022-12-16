@@ -6,6 +6,7 @@ DATA_CAPTURE:
   ROOT_DATA_PATH: 'C:\Users\student\Documents\git\addattachment-python\data'
   SD_CARD_TIME: "30m"
   EEG: "eeg.csv"
+  GSR: "gsr.csv"
   STREAM:
     IP: "224.0.0.1"
     PORT: "5050"

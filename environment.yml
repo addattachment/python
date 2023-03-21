@@ -16,3 +16,4 @@ dependencies:
       - pylsl==1.16.0
       - pyinstaller
       - python-osc
+      - pyftdi

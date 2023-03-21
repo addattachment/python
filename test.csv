@@ -1,0 +1,59 @@
+
+time: 1678373859, {"connectMessage":"Hello from 192.168.50.188","_time":"donderdag 9 maart 2023 15:57"}
+time: 1678373874, time: 1678373874, message: Android application is closing 
+time: 1678373993, {"connectMessage":"Hello from 192.168.50.188","_time":"Thursday, March 9, 2023 3:59 PM"}
+time: 1678374007, {"websocketMessage":"switch scene to","newScene":"Basescene","_time":8.72806453704834}
+time: 1678374009, {"connectMessage":"Hello from 192.168.50.188","_time":"Thursday, March 9, 2023 4:00 PM"}
+time: 1678374012, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":true,"_time":12.465920448303223}
+time: 1678374012, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":false,"_time":13.036710739135743}
+time: 1678374014, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":true,"_time":14.999712944030762}
+time: 1678374014, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":false,"_time":15.027548789978028}
+time: 1678374014, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":true,"_time":15.09713363647461}
+time: 1678374014, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":false,"_time":15.111050605773926}
+time: 1678374019, {"trialNumber":0,"websocketMessage":"gaze","targetName":"caregiver","gazeStart":true,"_time":19.76161766052246}
+time: 1678374020, {"trialNumber":0,"websocketMessage":"gaze","targetName":"caregiver","gazeStart":false,"_time":20.52758026123047}
+time: 1678374022, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":false,"_time":22.630096435546876}
+time: 1678374022, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":true,"_time":23.15919303894043}
+time: 1678374023, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":false,"_time":23.493284225463868}
+time: 1678374023, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":true,"_time":23.507204055786134}
+time: 1678374023, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":false,"_time":23.674251556396486}
+time: 1678374023, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":true,"_time":23.924896240234376}
+time: 1678374023, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":false,"_time":24.064128875732423}
+time: 1678374026, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":true,"_time":26.653682708740236}
+time: 1678374028, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":true,"_time":28.54708480834961}
+time: 1678374032, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":true,"_time":32.57057571411133}
+time: 1678374034, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":true,"_time":34.70076370239258}
+time: 1678374038, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":false,"_time":38.72429656982422}
+time: 1678374040, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":false,"_time":41.13285827636719}
+time: 1678374044, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":true,"_time":45.14250183105469}
+time: 1678374047, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":false,"_time":47.787742614746097}
+time: 1678374051, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":false,"_time":51.825374603271487}
+time: 1678374055, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":true,"_time":55.80717086791992}
+time: 1678374055, {"trialNumber":0,"websocketMessage":"gaze","targetName":"tegenspeler","gazeStart":false,"_time":56.05781555175781}
+time: 1678374060, {"trialNumber":0,"websocketMessage":"gaze","targetName":"caregiver","gazeStart":true,"_time":60.41572570800781}
+time: 1678374060, {"trialNumber":0,"websocketMessage":"gaze","targetName":"caregiver","gazeStart":false,"_time":60.84727478027344}
+time: 1678374137, {"connectMessage":"Hello from 192.168.50.188","_time":"Thursday, March 9, 2023 4:02 PM"}
+time: 1678374160, {"websocketMessage":"switch scene to","newScene":"Basescene","_time":25.950712203979493}
+time: 1678374161, {"connectMessage":"Hello from 192.168.50.188","_time":"Thursday, March 9, 2023 4:02 PM"}
+time: 1678374173, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":false,"_time":39.030513763427737}
+time: 1678374178, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":false,"_time":43.24900817871094}
+time: 1678374181, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":false,"_time":47.00815200805664}
+time: 1678374185, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":true,"_time":51.031768798828128}
+time: 1678374188, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":false,"_time":53.20376205444336}
+time: 1678374192, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":true,"_time":57.22723388671875}
+time: 1678374194, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":false,"_time":59.802913665771487}
+time: 1678374198, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":true,"_time":63.868507385253909}
+time: 1678374201, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":true,"_time":66.50004577636719}
+time: 1678374205, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":true,"_time":70.5096435546875}
+time: 1678374221, {"connectMessage":"Hello from 192.168.50.188","_time":"donderdag 9 maart 2023 16:03"}
+time: 1678374236, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":false,"_time":14.685049057006836}
+time: 1678374240, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":false,"_time":18.867382049560548}
+time: 1678374244, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":true,"_time":22.623611450195314}
+time: 1678374248, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":false,"_time":26.926471710205079}
+time: 1678374253, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":false,"_time":31.360031127929689}
+time: 1678374257, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":true,"_time":35.46563720703125}
+time: 1678374261, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":true,"_time":39.241764068603519}
+time: 1678374265, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":true,"_time":43.24137496948242}
+time: 1678374268, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"saskia","realPlayer":true,"hit":true,"_time":46.64200973510742}
+time: 1678374272, {"trialNumber":0,"websocketMessage":"PlayerBallScore","player":"Tinne","realPlayer":false,"hit":false,"_time":50.903350830078128}
+time: 1678374311, time: 1678374311, message: Android application is closing 

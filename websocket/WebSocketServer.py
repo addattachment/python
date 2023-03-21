@@ -36,14 +36,14 @@ async def start_ws_server(params=None, output_file="", ip: str = 'localhost',
                           port: int = 8080):
     if params is None:
         params = [{"i": "test", "name": "Charles"}]
-    print("starting websocket server")
+    print("starting websocket server, with params", params)
     async with websockets.serve(functools.partial(ws_handler, params=params, output_file=output_file), ip, port) as ws:
         await asyncio.Future()  # run forever
 
 
 if __name__ == '__main__':
     websocket_data = [
-        {"id": "123"},
+        {"player": "Sander"},
         {"contingency": "20"}
     ]
     asyncio.run(start_ws_server(params=websocket_data, output_file="test.csv", ip='192.168.50.188'))

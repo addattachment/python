@@ -18,6 +18,7 @@ class GUI(tk.Tk):
         self.player_age = None
         self.player_id = None
         self.contingency = None
+        self.height = None
         self.title("AddAttachment")
 
         window_width = 400
@@ -101,7 +102,9 @@ class GUI(tk.Tk):
             "contingency": self.contingency.get(),
             "age": self.player_age.get(),
             "gender": self.player_gender.get(),
-            "treatment": self.player_treatment.get()
+            "treatment": self.player_treatment.get(),
+            "height": 120
+
         }
         return results
 

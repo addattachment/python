@@ -12,6 +12,7 @@ We'll try to make an executable of this project using PyInstaller
 """
 import asyncio
 import logging
+import os
 from datetime import datetime
 
 from brainflow import BoardIds
@@ -23,6 +24,11 @@ from utils.GUI import GUI
 from utils.utils import *
 from websocket.WebSocketServer import start_ws_server
 import atexit
+
+eeg = False
+gsr = False
+ws = True
+lsl = False
 
 
 def stop_all(websocket, eeg, gsr):
@@ -45,34 +51,42 @@ if __name__ == '__main__':
     Make sure emotibit oscilloscope is looking for a stream 'DataSyncMarker_emotibit, source_id = LSL1'
     next, the python file should be the first one to connect, ONLY then you may open emotibit oscilloscope!
     """
-
-    # open EEG stream and stream towards EEG folder
-    eeg = EEG(
-        config=config,
-        root_data_path=root_data_path,
-        board_id=BoardIds.CYTON_BOARD
-    )
-
-    lsl = LSLReceptor(eeg=eeg, prop="name", value="DataSyncMarker_eeg")
-    while not lsl.is_running():
-        continue
-
-    eeg.launch_eeg()
-    x = lsl.start_receive_thread()
+    if eeg:
+        # open EEG stream and stream towards EEG folder
+        eeg = EEG(
+            config=config,
+            root_data_path=root_data_path,
+            board_id=BoardIds.CYTON_BOARD
+        )
+    if lsl:
+        lsl = LSLReceptor(eeg=eeg, prop="name", value="DataSyncMarker_eeg")
+        while not lsl.is_running():
+            continue
+    if eeg:
+        eeg.launch_eeg()
+    if lsl:
+        x = lsl.start_receive_thread()
 
     # eeg.start_test_markers_thread()
     # open websocket and stream data to folder websocket (separate files for EOG data?)
-    websocket_data = [
-        {"name": player.name},
-        {"contingency": player.contingency}
-    ]
-    x.join()
-    logging.info("Main    : all done")
+    websocket_data = [{"type": "player",
+                       "playerValues": {
+                           "name": player.name,
+                           "height": player.height,
+                           "gender": player.gender,
+                           "contingency": player.contingency
+                       }}]
     try:
-        asyncio.run(start_ws_server(params=websocket_data, output_file="test.csv", ip='192.168.50.188', port=8081))
+        asyncio.run(start_ws_server(params=websocket_data,
+                                    output_file=os.path.join(root_data_path, "websocket", "websocket.csv"),
+                                    ip='192.168.50.188', port=8081))
     except asyncio.CancelledError:
         pass
     except KeyboardInterrupt:
         print("stopped by keyboard")
-        stop_all(eeg=eeg)
+        if eeg:
+            stop_all(eeg=eeg)
         pass
+    if lsl:
+        x.join()
+        logging.info("Main    : all done")

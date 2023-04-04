@@ -16,6 +16,7 @@ class PlayerSession:
         self.websocket_dir = None
         self.eog_dir = None
         self.eeg_dir = None
+        self.trial_block = player_config.get("trial_block")
 
     def set_folders(self, eeg, eog, websocket, gsr):
         self.eeg_dir = eeg
@@ -33,7 +34,8 @@ class PlayerSession:
             "age": self.age,
             "gender": self.gender,
             "treatment": self.treatment,
-            "height": self.height
+            "height": self.height,
+            "trial_block": self.trial_block
         }
         with open(Path(location / file_name), "w+") as c:
             res = json.dumps(conf)

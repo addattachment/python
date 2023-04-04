@@ -20,6 +20,7 @@ class GUI(tk.Tk):
         self.contingency = None
         self.height = None
         self.title("AddAttachment")
+        self.block = None
 
         window_width = 400
         window_height = 400
@@ -83,6 +84,13 @@ class GUI(tk.Tk):
         radio_treat2 = ttk.Radiobutton(name_frame, text="B", variable=self.player_treatment, value="B")
         radio_treat2.grid(row=5, column=2)
 
+        self.block = tk.IntVar()
+        tk.Label(name_frame, justify=tk.LEFT, text="Trial block").grid(row=6)
+        radio_block = ttk.Radiobutton(name_frame, text="1", variable=self.block, value=1)
+        radio_block.grid(row=6, column=1)
+        radio_block2 = ttk.Radiobutton(name_frame, text="2", variable=self.block, value=2)
+        radio_block2.grid(row=6, column=2)
+
         close_button = ttk.Button(name_frame, text="Save & close", command=self.destroy)
         close_button.grid(row=8, column=0)
 
@@ -103,7 +111,8 @@ class GUI(tk.Tk):
             "age": self.player_age.get(),
             "gender": self.player_gender.get(),
             "treatment": self.player_treatment.get(),
-            "height": 120
+            "height": 120,
+            "trial_block": self.block.get()
 
         }
         return results

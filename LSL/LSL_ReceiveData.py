@@ -17,7 +17,8 @@ class LSLReceptor:
         self.streams = resolve_stream(prop, value)
         # create a new inlet to read from the stream
         self.inlet = StreamInlet(self.streams[0])
-        self.Marker = {'ball_release': 0, 'ball_good_hit': 1, 'ball_bad_hit': 2, 'score': 3, 'test': 4}
+        self.Marker = {'game_start': 0, 'ball_release': 1, 'ball_good_hit': 2, 'ball_bad_hit': 3, 'score': 4, 'test': 5,
+                       'end_game': 6}
         self.eeg = eeg
 
     def is_running(self):

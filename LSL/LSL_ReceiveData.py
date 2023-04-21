@@ -31,6 +31,7 @@ class LSLReceptor:
 
     def start_receive_thread(self):
         x = threading.Thread(target=self.receive_test)
+        print("starting LSL")
         logging.info("Main    : before running thread")
         x.start()
         logging.info("Main    : wait for the thread to finish")
@@ -69,10 +70,10 @@ class LSLReceptor:
 def main():
     # lsl = LSLReceptor(value="Markers")
     # lsl = LSLReceptor(prop="source_id", value="LSL2")
-    lsl = LSLReceptor(prop="name", value="DataSyncMarker_eeg")
+    lsl = LSLReceptor(prop="Name", value="DataSyncMarker_eeg")
     print(lsl.inlet.value_type)
-    lsl.start_receive_thread()
-
+    # lsl.start_receive_thread()
+    lsl.receive_test()
 
 if __name__ == '__main__':
     main()

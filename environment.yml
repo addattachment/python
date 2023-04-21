@@ -6,7 +6,7 @@ dependencies:
   - python=3.10
   - numpy
   - pyyaml=6.0
-  - liblsl=1.16.0
+  - liblsl=1.16.1
   - websockets=10.3
   - pip
   - pyserial=3.5

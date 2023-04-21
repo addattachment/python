@@ -1,5 +1,6 @@
 import ast
 import asyncio
+import logging
 import time
 import functools
 import pandas as pd
@@ -37,9 +38,16 @@ async def start_ws_server(params=None, output_file="", ip: str = 'localhost',
     if params is None:
         params = [{"i": "test", "name": "Charles"}]
     print("starting websocket server, with params", params)
-    async with websockets.serve(functools.partial(ws_handler, params=params, output_file=output_file), ip, port) as ws:
-        await asyncio.Future()  # run forever
-
+    try:
+        async with websockets.serve(functools.partial(ws_handler, params=params, output_file=output_file), ip,
+                                    port) as ws:
+            await asyncio.Future()  # run forever
+    except Exception as e:
+        logging.error(e)
+        logging.error("is de computer met het juiste netwerk verbonden?")
+        import traceback
+        traceback.print_exc()
+        input("press button to continue")
 
 if __name__ == '__main__':
     websocket_data = [

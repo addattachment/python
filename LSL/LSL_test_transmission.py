@@ -15,8 +15,8 @@ def main(streamName: str = 'MyMarkerStream', contentType: str = "Markers", sourc
     # connections wouldn't auto-recover). The important part is that the
     # content-type is set to 'Markers', because then other programs will know how
     #  to interpret the content
-    info = StreamInfo(streamName, contentType, 1, 0, pylsl.cf_float32, sourceId)
-
+    info = StreamInfo(streamName, contentType, 1, 0, 'string', sourceId)
+    # pylsl.cf_int8
     # next make an outlet
     outlet = StreamOutlet(info)
 
@@ -26,12 +26,15 @@ def main(streamName: str = 'MyMarkerStream', contentType: str = "Markers", sourc
     while True:
         # pick a sample to send and wait for a bit
         # outlet.push_sample([random.choice(markernames)])
-        # sample = [round(random.uniform(0.0, 10.0), 1)]
+        # sample = [round(random.uniform(0.0, 10.0), 0)]
+        # sample = 1
+        sample = "test"
         print("lsl test sends {}".format(sample))
         outlet.push_sample([sample])
-        sample += 0.1
+        # sample += 0.1
         time.sleep(random.random() * 3)
 
 
 if __name__ == '__main__':
-    main(streamName="DataSyncMarker_eeg", contentType="Markers", sourceId="12345")
+    # main(streamName="DataSyncMarker_eeg", contentType="Markers", sourceId="12345")
+    main(streamName="MyMarkerStream", contentType="Markers", sourceId="12345")

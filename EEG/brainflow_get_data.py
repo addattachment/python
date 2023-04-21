@@ -23,7 +23,7 @@ from utils.utils import load_config
 
 class EEG:
     def __init__(self, config: yaml, root_data_path: Path, board_id: BoardIds = BoardIds.CYTON_BOARD):
-        print("EEG init")
+        logging.info("EEG init")
         self.board = None
         self.board_id = board_id
         self.config = config
@@ -48,12 +48,12 @@ class EEG:
 
     def common_capture(self):
         eeg_names = self.board.get_eeg_names(board_id=self.board.board_id, preset=BrainFlowPresets.DEFAULT_PRESET)
-        print("eeg names, according to Default 10-20 locations: {}".format(eeg_names))
+        logging.info("eeg names, according to Default 10-20 locations: {}".format(eeg_names))
         eeg_channels = self.board.get_eeg_channels(board_id=self.board.board_id, preset=BrainFlowPresets.DEFAULT_PRESET)
-        print("eeg channels: {}".format(eeg_channels))
+        logging.info("eeg channels: {}".format(eeg_channels))
         board_descr = self.board.get_board_descr(self.board.board_id, preset=BrainFlowPresets.DEFAULT_PRESET)
 
-        print("board description: ")
+        logging.info("board description: ")
         pprint(board_descr)
         try:
             emg_ch = self.board.get_emg_channels(board_id=self.board.board_id, preset=BrainFlowPresets.DEFAULT_PRESET)
@@ -79,13 +79,14 @@ class EEG:
                 res_ch = self.board.get_resistance_channels(board_id=self.board.board_id,
                                                             preset=BrainFlowPresets.DEFAULT_PRESET)
         except BrainFlowError as e:
-            print(e)
+            logging.warning(e)
             pass
         try:
             data = self.board.get_board_data()  # get all data and remove it from internal buffer
-            print(self.board.get_sampling_rate(board_id=self.board.board_id, preset=BrainFlowPresets.DEFAULT_PRESET))
+            logging.info(
+                self.board.get_sampling_rate(board_id=self.board.board_id, preset=BrainFlowPresets.DEFAULT_PRESET))
         except BrainFlowError as e:
-            print(e)
+            logging.warning(e)
             pass
 
     def prep_stream_file(self):
@@ -98,7 +99,7 @@ class EEG:
                 csvwriter = csv.writer(csvfile, delimiter="\t")
                 csvwriter.writerow(header_list)
         except Exception as e:
-            print(e)
+            logging.warning(e)
             return False
         return True
 
@@ -115,7 +116,7 @@ class EEG:
         DataFilter.write_file(data, str(self.file.resolve()), 'a')  # use 'a' for append mode
 
     def insert_marker(self, i: float):
-        print("inserting {}".format(i))
+        logging.info("inserting {}".format(i))
 
         self.board.insert_marker(i)
 
@@ -126,11 +127,11 @@ class EEG:
         :param board:
         """
         if not self.board.is_prepared():
-            print("first prepare the board!")
+            logging.warning("first prepare the board!")
             return
 
         res = self.board.config_board("V")
-        print("Board version: {}".format(res))
+        logging.info("Board version: {}".format(res))
 
         logging_time = {
             "A": "5m",
@@ -147,14 +148,15 @@ class EEG:
         SD_CMD = list(logging_time.keys())[
             list(logging_time.values()).index(self.config["DATA_CAPTURE"]["SD_CARD_TIME"])]
         if SD_CMD:
-            print("setting the SD card to {}, with cmd {}".format(self.config["DATA_CAPTURE"]["SD_CARD_TIME"], SD_CMD))
+            logging.info(
+                "setting the SD card to {}, with cmd {}".format(self.config["DATA_CAPTURE"]["SD_CARD_TIME"], SD_CMD))
             self.board.config_board(SD_CMD)
         else:
-            print("didn't find correct SD Card command?")
+            logging.warning("didn't find correct SD Card command?")
 
     def stop_sd_recording(self):
         self.board.config_board("j")
-        print("stopping SD card recording")
+        logging.info("stopping SD card recording")
 
     def launch_eeg(self):
         self.prep_stream_file()
@@ -163,7 +165,7 @@ class EEG:
         self.config_board()
         self.board.start_stream()
         # self.common_capture()
-        print("EEG started")
+        logging.info("EEG started")
 
     def start_test_markers_thread(self):
         x = threading.Thread(target=self.test_markers())
@@ -177,7 +179,7 @@ class EEG:
         i = 1.0
         try:
             while True:
-                print("sending {}".format(i))
+                logging.info("sending {}".format(i))
                 self.insert_marker(i)
                 i += 0.1
                 time.sleep(1)
@@ -185,10 +187,10 @@ class EEG:
             pass
         self.stop_eeg()
 
-    @atexit.register
+    # @atexit.register
     def stop_eeg(self):
         # make sure we clean the connection if the application is stopped
-        print("finishing up EEG")
+        logging.info("finishing up EEG")
         self.stop_sd_recording()
         self.board.stop_stream()
         self.board.release_session()

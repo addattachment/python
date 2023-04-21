@@ -13,4 +13,4 @@ create a conda environment based on the environment.yml file
 there's a brainflow implementation, yet no SCR channels are available at the moment.
 In that case it's more useful to use the emotibit Oscilloscope.
 
-![](./GSR/scr_to_eda.webp)
+![scr to eda](./GSR/scr_to_eda.webp)

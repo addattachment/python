@@ -30,9 +30,8 @@ gsr = False
 ws = True
 lsl = False
 
-
-def stop_all(websocket, eeg, gsr):
-    eeg.stop_eeg()
+# def stop_all(websocket, eeg, gsr):
+#     eeg.stop_eeg()
 
 
 if __name__ == '__main__':
@@ -48,7 +47,8 @@ if __name__ == '__main__':
     player.create_player_conf(location=root_data_path, file_name="player_config.json")
     # check if an LSL stream is running
     """IMPORTANT
-    Make sure emotibit oscilloscope is looking for a stream 'DataSyncMarker_emotibit, source_id = LSL1'
+    Make sure emotibit oscilloscope is looking for a stream 'DataSyncMarker_emotibit, source_id = LSL1' by setting the 
+    configs correctly
     next, the python file should be the first one to connect, ONLY then you may open emotibit oscilloscope!
     """
     if eeg:
@@ -85,8 +85,8 @@ if __name__ == '__main__':
         pass
     except KeyboardInterrupt:
         print("stopped by keyboard")
-        if eeg:
-            stop_all(eeg=eeg)
+        # if eeg:
+        #     stop_all(eeg=eeg)
         pass
     if lsl:
         x.join()

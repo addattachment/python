@@ -4,7 +4,7 @@ import threading
 
 from pylsl import StreamInlet, resolve_stream
 
-from EEG.brainflow_get_data import EEG
+from eeg.brainflow_get_data import EEG
 
 
 class LSLReceptor:

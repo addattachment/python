@@ -14,7 +14,7 @@ from brainflow import BrainFlowError, DataFilter
 from brainflow.board_shim import BoardShim, BrainFlowInputParams, BoardIds, BrainFlowPresets
 import sys
 
-from Player.PlayerSession import PlayerSession
+from player.PlayerSession import PlayerSession
 
 sys.path.append("../")
 from utils import get_com_port

@@ -11,5 +11,8 @@ DATA_CAPTURE:
     PPG: "gsr_ppg.csv"
     EDA: "gsr_eda.csv"
   STREAM:
-    IP: "224.0.0.1"
-    PORT: "5050"
+    IP: "192.168.0.188"
+    PORT: 8081
+  WS:
+    IP: "192.168.0.188"
+    PORT: 8081

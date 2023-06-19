@@ -40,7 +40,7 @@ class GUI(tk.Tk):
         self.input_frame = None
         self.close_error = None
         self.player_name = None
-        self.player_treatment = None
+        # self.player_treatment = None
         self.age_error = None
         self.textbox_label = None
         self.textbox_age = None
@@ -113,13 +113,13 @@ class GUI(tk.Tk):
         radio_gend2.grid(row=4, column=2)
         self.entry_list.append(self.player_gender)
 
-        self.player_treatment = tk.StringVar()
-        tk.Label(self.input_frame, justify=tk.LEFT, text="Treatment speler").grid(row=5)
-        radio_treat = ttk.Radiobutton(self.input_frame, text="A", variable=self.player_treatment, value="A")
-        radio_treat.grid(row=5, column=1)
-        radio_treat2 = ttk.Radiobutton(self.input_frame, text="B", variable=self.player_treatment, value="B")
-        radio_treat2.grid(row=5, column=2)
-        self.entry_list.append(self.player_treatment)
+        # self.player_treatment = tk.StringVar()
+        # tk.Label(self.input_frame, justify=tk.LEFT, text="Treatment speler").grid(row=5)
+        # radio_treat = ttk.Radiobutton(self.input_frame, text="A", variable=self.player_treatment, value="A")
+        # radio_treat.grid(row=5, column=1)
+        # radio_treat2 = ttk.Radiobutton(self.input_frame, text="B", variable=self.player_treatment, value="B")
+        # radio_treat2.grid(row=5, column=2)
+        # self.entry_list.append(self.player_treatment)
 
         self.block = tk.StringVar()
         tk.Label(self.input_frame, justify=tk.LEFT, text="Trial block").grid(row=6)
@@ -150,7 +150,7 @@ class GUI(tk.Tk):
             "contingency": self.contingency.get(),
             "age": self.player_age.get(),
             "gender": self.player_gender.get(),
-            "treatment": self.player_treatment.get(),
+            # "treatment": self.player_treatment.get(),
             "height": 120,
             "trial_block": self.block.get()
         }

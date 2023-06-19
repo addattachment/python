@@ -9,7 +9,7 @@ class PlayerSession:
         self.id = player_config.get("id")
         self.age = player_config.get("age")
         self.contingency = player_config.get("contingency")
-        self.treatment = player_config.get("treatment")
+        # self.treatment = player_config.get("treatment")
         self.height = player_config.get("height")
         self.playtime = playtime
         self.gsr_dir = None
@@ -33,7 +33,7 @@ class PlayerSession:
             "date": self.playtime,
             "age": self.age,
             "gender": self.gender,
-            "treatment": self.treatment,
+            # "treatment": self.treatment,
             "height": self.height,
             "trial_block": self.trial_block
         }

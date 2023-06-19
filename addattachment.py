@@ -17,9 +17,9 @@ from datetime import datetime
 
 from brainflow import BoardIds
 
-from EEG.brainflow_get_data import EEG
-from LSL.LSL_ReceiveData import LSLReceptor
-from Player.PlayerSession import PlayerSession
+from eeg.brainflow_get_data import EEG
+from lsl.LSL_ReceiveData import LSLReceptor
+from player.PlayerSession import PlayerSession
 from utils.GUI import GUI
 from utils.utils import *
 from websocket.WebSocketServer import start_ws_server
@@ -80,7 +80,8 @@ if __name__ == '__main__':
     try:
         asyncio.run(start_ws_server(params=websocket_data,
                                     output_file=os.path.join(root_data_path, "websocket", "websocket.csv"),
-                                    ip='192.168.50.188', port=8081))
+                                    ip=config["DATA_CAPTURE"]["WS"]["IP"],
+                                    port=config["DATA_CAPTURE"]["WS"]["PORT"]))
     except asyncio.CancelledError:
         pass
     except KeyboardInterrupt:

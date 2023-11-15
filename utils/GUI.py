@@ -42,7 +42,7 @@ class GUI(tk.Tk):
         self.player_name = None
         # self.player_treatment = None
         self.age_error = None
-        self.textbox_label = None
+        self.textbox_label_age = None
         self.textbox_age = None
         self.player_gender = None
         self.player_age = None
@@ -51,6 +51,7 @@ class GUI(tk.Tk):
         self.height = None
         self.title("AddAttachment")
         self.block = None
+        self.trial_number = 0
         self.entry_list = []
         window_width = 400
         window_height = 400
@@ -94,10 +95,10 @@ class GUI(tk.Tk):
         # entered_button.pack(fill="x", expand=True, pady=10)
 
         vcmd = (self.register(self.validate_age), '%P')
-        ivcmd = (self.register(self.on_invalid),)
+        ivcmd = (self.register(self.on_invalid_age),)
         self.player_age = tk.IntVar()
-        self.textbox_label = ttk.Label(self.input_frame, foreground='red', justify=tk.LEFT, text="Leeftijd speler")
-        self.textbox_label.grid(row=3)
+        self.textbox_label_age = ttk.Label(self.input_frame, foreground='red', justify=tk.LEFT, text="Leeftijd speler")
+        self.textbox_label_age.grid(row=3)
         self.textbox_age = ttk.Entry(self.input_frame, textvariable=self.player_age)
         self.textbox_age.config(validate='focusout', validatecommand=vcmd, invalidcommand=ivcmd)
         self.textbox_age.grid(row=3, column=1)
@@ -129,6 +130,20 @@ class GUI(tk.Tk):
         radio_block2.grid(row=6, column=2)
         self.entry_list.append(self.block)
 
+        # we add trial_number as a fallback if the game gets stuck, the participants can restart the game from a
+        # certain trial_number
+        self.trial_number = tk.IntVar()
+        self.textbox_label_trial_number = ttk.Label(self.input_frame, justify=tk.LEFT, text="afwijken van trial nummer?")
+        self.textbox_label_trial_number.grid(row=7)
+        self.textbox_trial_number = ttk.Entry(self.input_frame, textvariable=self.trial_number)
+        self.textbox_trial_number.grid(row=7, column=1)
+        vtncmd = (self.register(self.validate_trial_number), '%P')
+        itnvcmd = (self.register(self.on_invalid_trial_number),)
+        self.textbox_trial_number.config(validate='focusout', validatecommand=vtncmd, invalidcommand=itnvcmd)
+        self.trial_number_error = ttk.Label(self.input_frame, foreground='red')
+        self.trial_number_error.grid(row=7, column=2)
+        self.entry_list.append(self.trial_number)
+
         close_button = ttk.Button(self.input_frame, text="Save & close", command=self.clear_input)
         close_button.grid(row=8, column=0)
         self.close_error = ttk.Label(self.input_frame, foreground='red')
@@ -152,14 +167,20 @@ class GUI(tk.Tk):
             "gender": self.player_gender.get(),
             # "treatment": self.player_treatment.get(),
             "height": 120,
-            "trial_block": self.block.get()
+            "trial_block": self.block.get(),
+            "trial_number": self.trial_number.get()
         }
         return results
 
     def show_age_message(self, error='', color='black'):
         self.age_error['text'] = error
-        self.textbox_label['foreground'] = color
+        self.textbox_label_age['foreground'] = color
         self.textbox_age['foreground'] = color
+
+    def show_wrong_trial_number_message(self, error='', color='black'):
+        self.trial_number_error['text'] = error
+        self.textbox_label_trial_number['foreground'] = color
+        self.textbox_trial_number['foreground'] = color
 
     def show_close_message(self, error='', color='black'):
         self.close_error['text'] = error
@@ -171,13 +192,27 @@ class GUI(tk.Tk):
         self.show_age_message()
         return True
 
-    def on_invalid(self):
+    def validate_trial_number(self, value):
+        if int(value) < 0 or int(value) > 25:
+            return False
+        self.show_wrong_trial_number_message()
+        return True
+
+    def on_invalid_age(self):
         """
         Show the error message if the data is not valid
         :return:
         """
         logging.warning("not good")
         self.show_age_message('Please enter a valid age', 'red')
+
+    def on_invalid_trial_number(self):
+        """
+        Show the error message if the data is not valid
+        :return:
+        """
+        logging.warning("not good")
+        self.show_wrong_trial_number_message('Please enter a valid trial_number', 'red')
 
     def clear_input(self):
         slave_list = self.input_frame.grid_slaves()

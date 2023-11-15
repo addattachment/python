@@ -68,9 +68,9 @@ class LSLReceptor:
 
 
 def main():
-    # lsl = LSLReceptor(value="Markers")
+    lsl = LSLReceptor(value="Markers")
     # lsl = LSLReceptor(prop="source_id", value="LSL2")
-    lsl = LSLReceptor(prop="Name", value="DataSyncMarker_eeg")
+    # lsl = LSLReceptor(prop="Name", value="DataSyncMarker_emotibit")
     print(lsl.inlet.value_type)
     # lsl.start_receive_thread()
     lsl.receive_test()

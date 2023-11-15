@@ -75,7 +75,8 @@ if __name__ == '__main__':
                            "height": player.height,
                            "gender": player.gender,
                            "contingency": player.contingency,
-                           "trial_block": player.trial_block
+                           "trial_block": player.trial_block,
+                           "trial_number": player.trial_number
                        }}]
     try:
         asyncio.run(start_ws_server(params=websocket_data,
